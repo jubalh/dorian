@@ -1,5 +1,7 @@
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.gesture import GestureDatabase
+from kivy.gesture import Gesture
 
 gesture_strings = { 'left_to_right': 'eNq1l89y2jAQxu96EbiE0WpXf/YF6LUzPECHJh7CJAUPOG3z9l2tTExIHLsHcVgS6dNP8n6ytCz3T/vfr6tdc+5eTo351n+31iwfWjCbxWH7q1mY1smf8oXmvFmcu9PxqTnLv2SWz603y08hG5WZNmRUlPHtcX/o8rCUh/HIsO9ZZVooK8hLeJUh4MzarixZBxAuMUFezt/cjWZ9Z1fBoUuWLtGcf26/noR0Em92o/xdj/bBe+sC9XEGW58b4hy2Y6ZoUx/jNDspm2ewKf0n22niHVRhO2XjDDayg8AIJQL7abia6XwduLrpYh242unm2IlIyOAvUZ55Co7qJ0IduBqKcwx1IUZH6RLDNFv9RF+FrXbiHDvhJilpGq52IleBk9pJUAeudhLWgaufNMdPC9dwZD/tKKmjFCvR1VLiOnSvnnqoRFdT/WAq+hiinEsaA8glWPC5i4gj+j7KJTpNV1f94KpzhJhCH0M+/no6gLVy1ZVomWcsXU31sQ5cPfVcBR7U0jBYat9Zio5xoKerHgfTpUVQRwPWgauhoTf0TvNiwfpUInh2b/B3CZMtOYOujoZYia6WBh7oaK9rFC9H8xs9vtvr05ZGtTTCACe6qjcx74qejZCYIHKJMxYe1dGIA9tfCog+DpsRyQebKPRxuuqK6mj0s+D+OityJAk8l/z3p6Y5vBXwcsNKBR+jWa4ljStr1nID5G04fILp2pjMVhQpjitYFexHFclmBdrxWeR4zAoXxhVOFcjjClSF/2IWUkX6QuGzggBuu0bkQeXOFaCMyo1RGzGt+PpDopA2VWhO5WeIDkN3KxSF5pQCf1yHKwzWnFIsGdPESaOmUcqnT4ZhUWgaicuKnf04NWNR0CeMz+RU5GEcWHLKaSaw5JR5HBhvFPpgktOyzx+b/e6xkx3ObNbuxrX8qm0Wf/YP3WP+yWltlmQfpLU7Pjen7eG+0R7Qkze392/kj/Z0fHi577RXXkJJqGcQ8wMGedcQ8vGz+gc2PvoZ',
 
@@ -11,7 +13,7 @@ for name, gesture_string in gesture_strings.items():
     gesture.name = name
     gestures.add_gesture(gesture)
 
-class GestureBox(BoxLayout):
+class GestureBox(Screen):
 
     def on_touch_down(self, touch):
         touch.ud['gesture_path'] = [(touch.x, touch.y)]
@@ -22,5 +24,11 @@ class GestureBox(BoxLayout):
         super(GestureBox, self).on_touch_move(touch)
 
     def on_touch_up(self, touch):
-        print(touch.ud['gesture_path'])
+        if 'gesture_path' in touch.ud:
+            gesture = Gesture()
+            gesture.add_stroke(touch.ud['gesture_path'])
+            gesture.normalize()
+            match = gestures.find(gesture, minscore=0.09)
+            if match:
+                print("{} event".format(match[1].name))
         super(GestureBox, self).on_touch_up(touch)

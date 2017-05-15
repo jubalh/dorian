@@ -64,10 +64,10 @@ Builder.load_string("""
 """)
 
 # Declare both screens
-class MenuScreen(Screen):
+class MenuScreen(GestureBox):
     pass
 
-class SettingsScreen(Screen):
+class SettingsScreen(GestureBox):
     pass
 
 
