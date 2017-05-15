@@ -12,12 +12,8 @@ from gesture_box import GestureBox
 # property manager that gives you the instance of the ScreenManager used.
 Builder.load_string("""
 <MenuScreen>:
-    BoxLayout:
-        Image:
-            source: str(app.imgsource)
-        Button:
-            text: 'to settings'
-            on_press: root.manager.current = 'settings'
+    Image:
+        source: str(app.imgsource)
 
 <SettingsScreen>:
     BoxLayout:
@@ -74,15 +70,18 @@ class SettingsScreen(GestureBox):
 class TestApp(App):
 
     imgsource = StringProperty()
+    sm = ScreenManager()
 
     def build(self):
+        menu_screen = MenuScreen(name='menu')
+        menu_screen.set_screenmanager(self.sm)
+        settings_screen = SettingsScreen(name='settings')
+        settings_screen.set_screenmanager(self.sm)
 
-        # Create the screen manager
-        sm = ScreenManager()
-        sm.add_widget(MenuScreen(name='menu'))
-        sm.add_widget(SettingsScreen(name='settings'))
+        self.sm.add_widget(menu_screen)
+        self.sm.add_widget(settings_screen)
 
-        return sm
+        return self.sm
 
 if __name__ == '__main__':
     TestApp().run()
