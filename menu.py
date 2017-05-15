@@ -4,6 +4,8 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.image import Image
 from kivy.uix.slider import Slider
 from kivy.properties import StringProperty
+from kivy.uix.boxlayout import BoxLayout
+from gesture_box import GestureBox
 
 # Create both screens. Please note the root.manager.current: this is how
 # you can control the ScreenManager from kv. Each screen has by default a
