@@ -22,6 +22,8 @@ Builder.load_string("""
         BoxLayout:
             orientation: 'vertical'
             BoxLayout:
+                size_hint_y: None
+                height: '50dp'
                 orientation: 'horizontal'
                 Label:
                     text: 'Folder:'
@@ -31,6 +33,8 @@ Builder.load_string("""
                     id: textinput_path
             BoxLayout:
                 orientation: 'horizontal'
+                size_hint_y: None
+                height: '50dp'
                 Label:
                     text: 'Display duration:'
                 BoxLayout:
@@ -42,11 +46,14 @@ Builder.load_string("""
                         range: (5, 60)
                         value: '10'
                         step: 1
+            Widget:
             BoxLayout:
+                size_hint_y: None
+                height: '50dp'
                 orientation: 'horizontal'
                 Button:
                     text: 'Ok'
-                    on_press: 
+                    on_press:
                         root.manager.current = 'menu'
                         app.imgsource = textinput_path.text
                 Button:
