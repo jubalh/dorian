@@ -40,11 +40,11 @@ Builder.load_string("""
                 BoxLayout:
                     orientation: 'vertical'
                     Label:
-                        text: str(slider_time.value)
+                        text: "%2d" % slider_time.value
                     Slider:
                         id: slider_time
                         range: (5, 60)
-                        value: '10'
+                        value: 10
                         step: 1
             Widget:
             BoxLayout:
