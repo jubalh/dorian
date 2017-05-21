@@ -29,6 +29,7 @@ class DorianApp(App):
     sm = ScreenManager()
     settings_store = JsonStore('dorian.json')
     images = []
+    updater = None
 
     def build(self):
         display_screen = DisplayScreen(name='displayscreen')
@@ -55,7 +56,9 @@ class DorianApp(App):
         self.settings_store.put('dorian',
                 path = settings_screen.images_base_path.text,
                 duration = settings_screen.display_duration.value)
-
+        # stop old cycle
+        Clock.unschedule(self.updater)
+        # start new cycle
         self.new_base_start_slideshow()
 
     # needs args to work with scheduler
@@ -79,7 +82,7 @@ class DorianApp(App):
         # set new pic
         self.choose_new_random_picture()
         # start scheduler
-        Clock.schedule_interval(self.choose_new_random_picture,
+        self.updater = Clock.schedule_interval(self.choose_new_random_picture,
                 settings_screen.display_duration.value)
 
 if __name__ == '__main__':
