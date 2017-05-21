@@ -34,8 +34,8 @@ class GestureBox(Screen):
 
                 # we want the ok/cancel button pressed to return so only
                 # testing in pic -> settings direction here
-                if self.sm.current == 'menu' and match[1].name == 'left_to_right':
-                    self.sm.current = 'settings'
+                if self.sm.current == 'displayscreen' and match[1].name == 'left_to_right':
+                    self.sm.current = 'settingsscreen'
         super(GestureBox, self).on_touch_up(touch)
 
     def set_screenmanager(self, sm):
