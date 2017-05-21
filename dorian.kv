@@ -3,6 +3,8 @@
         source: str(app.imgsource)
 
 <SettingsScreen>:
+    images_base_path: textinput_path
+    display_duration: slider_time
     BoxLayout:
         BoxLayout:
             orientation: 'vertical'
@@ -41,6 +43,7 @@
                     on_press:
                         root.manager.current = 'displayscreen'
                         app.imgsource = textinput_path.text
+                        app.save_values()
                 Button:
                     text: 'Cancel'
                     on_press: root.manager.current = 'displayscreen'
