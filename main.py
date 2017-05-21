@@ -18,7 +18,6 @@ class DisplayScreen(GestureBox):
 class SettingsScreen(GestureBox):
     images_base_path = ObjectProperty()
     display_duration = ObjectProperty()
-    pass
 
 # Dorian
 class DorianApp(App):
