@@ -71,7 +71,7 @@ class DorianApp(App):
     def build_images_list(self, path):
         for dirpath, subdirs, files in os.walk(path):
             for f in files:
-                if f.lower().rsplit(".")[-1] in ["jpeg", "jpg", "png"]:
+                if f.lower().endswith(('.png', '.jpg', '.jpeg')):
                     fullpath = os.path.join(dirpath, f)
                     self.images.append(fullpath)
 
