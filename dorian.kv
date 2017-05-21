@@ -1,6 +1,6 @@
 <DisplayScreen>:
     Image:
-        source: str(app.imgsource)
+        source: str(app.current_image_path)
 
 <SettingsScreen>:
     images_base_path: textinput_path
@@ -42,8 +42,8 @@
                     text: 'Ok'
                     on_press:
                         root.manager.current = 'displayscreen'
-                        app.imgsource = textinput_path.text
-                        app.save_values()
+                        app.current_image_path = textinput_path.text
+                        app.on_settings_ok_pressed()
                 Button:
                     text: 'Cancel'
                     on_press: root.manager.current = 'displayscreen'
